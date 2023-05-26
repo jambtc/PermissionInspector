@@ -141,6 +141,20 @@ if (-not [string]::IsNullOrEmpty($codiceFiscale)) {
     }
 }
 
+# Richiedi il disco di salvataggio del file CSV
+$csvDisk = Read-Host -Prompt "Inserisci il disco su cui salvare il file CSV (C,D,E) [Default E]"
+if ([string]::IsNullOrEmpty($csvDisk)) {
+    $csvDisk = "E"
+}
+elseif ($csvDisk -ne "C" -and $csvDisk -ne "D" -and $csvDisk -ne "E") {
+    Write-Host "Il nome del disco è sbagliato. Selezionare C, D oppure E"
+    exit
+}
+
+# Assegno il nome del file in base al disco scelto
+$csvPath = $csvDisk + ":\PermessiCartelle.csv"
+
+
 if ([string]::IsNullOrEmpty($codiceFiscale)) {
     # Se non ho inserito il codice fiscale posso solo estrarre
     $action = "E"
@@ -161,7 +175,6 @@ if ($action -eq "E") { # Azione: Estrarre i permessi
     Get-FolderPermissions -folderPath $sharedFolderPath
 
     # Salva i risultati in un file CSV
-    $csvPath = "C:\PermessiCartelle.csv"
     $permissions | ForEach-Object { $_ } | Export-Csv -Path $csvPath -NoTypeInformation
 
     # Visualizza un messaggio di conferma
@@ -180,7 +193,6 @@ elseif ($action -eq "D") { # Azione: Eliminare i permessi
     Get-FolderPermissions -folderPath $sharedFolderPath -removeUser $codiceFiscale
 
     # Salva i risultati in un file CSV
-    $csvPath = "C:\PermessiCartelle.csv"
     $permissions | ForEach-Object { $_ } | Export-Csv -Path $csvPath -NoTypeInformation
 
     # Visualizza un messaggio di conferma
