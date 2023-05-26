@@ -16,5 +16,6 @@ Il flusso del programma è il seguente:
 1. Viene richiesto all'utente di inserire il percorso della cartella condivisa.
 1. Viene richiesto all'utente di inserire il codice fiscale dell'utente (lasciando vuoto per ottenere tutti i permessi).
 1. Se viene inserito un codice fiscale, viene richiesto all'utente di inserire il nome del dominio.
+1. Viene richiesto il disco su cui salvare il file CSV
 1. Se viene inserito un codice fiscale, viene richiesta all'utente l'azione desiderata: "E" per estrarre i permessi o "D" per eliminarli.
 1. Se non è stato inserito un codice fiscale o se è stato inserito, ma si è scelto l'azione di estrazione, viene prodotto un file CSV.
